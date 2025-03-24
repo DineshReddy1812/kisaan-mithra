@@ -251,7 +251,7 @@ margin-left: 399px ;
 }
 /* --------------projects------------- */
 #projects{
-    padding: 50px 0;
+    padding: 30px 0;
 }
 .pro-list{
     display: grid;
@@ -267,10 +267,10 @@ margin-left: 399px ;
     overflow: hidden;
 }
 .work img{
-    width: 400px;
+    width: 344px;
     border-radius: 10px;
     display: block;
-    height: 550px;
+    height: 350px;
     object-fit: cover;
     transition: transform 0.5s;
 }
@@ -280,7 +280,7 @@ margin-left: 399px ;
     margin: 8px;
 }
 .layer{
-    width: 419.5px;
+    width: 360.5px;
     height: 0;
     object-fit: cover;
     background: linear-gradient(rgb(0,0,0,0),#3261c6);
