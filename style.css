@@ -203,6 +203,41 @@ nav i {
     font-size: 20px;
     margin-bottom: 20px;
 }
+/* Weather Section Styling */
+#weatherLocation {
+    padding: 8px;
+    width: 70%;
+    margin-right: 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 8px 15px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .weather-card {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .weather-card img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
 .btn {
     display: inline-block;
     background: #1abc9c;
