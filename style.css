@@ -258,8 +258,8 @@ margin-left: 399px ;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 35px;
     margin-top: 50px;
-    padding-left: 130px;
-    padding-right: 70px;
+    padding-left: 170px;
+    padding-right: 100px;
 }
 .work{
     border-radius: 10px;
