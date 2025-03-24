@@ -90,6 +90,111 @@ nav i {
     color: white;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
+/* Bot Icon */
+#bot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+#bot-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+#bot-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Chat Window */
+#chat-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: none;  /* Ensure it's hidden initially */
+    flex-direction: column;
+}
+
+
+.chat-header {
+    background: #1abc9c;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.close-btn {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.chat-body {
+    height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f9f9f9;
+}
+
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    background: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.chat-footer button {
+    background: #1abc9c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.chat-footer button:hover {
+    background: #16a085;
+}
+
+/* Chat Message Styles */
+.user-message, .bot-message {
+    padding: 8px;
+    border-radius: 5px;
+    margin: 5px 0;
+    max-width: 80%;
+}
+
+.user-message {
+    background: #dff9fb;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background: #f1f1f1;
+    align-self: flex-start;
+}
+
 .head-text h1 {
     font-size: 48px;
     margin-bottom: 10px;
