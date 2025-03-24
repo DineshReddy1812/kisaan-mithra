@@ -4,63 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Register</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Bootstrap CDN for better UI -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
     <style>
         body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #f4f4f4;
-}
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4f4f4;
+        }
+        
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
 
-.container {
-    text-align: center;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
 
-input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-}
+        button {
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
 
-button {
-    padding: 10px 15px;
-    background: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+        button:hover {
+            background: #0056b3;
+        }
 
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <!-- Register Form -->
-        <div id="register-box">
-            <h2>Register</h2>
-            <input type="email" id="register-email" placeholder="Email">
-            <input type="password" id="register-password" placeholder="Password">
-            <button onclick="register()">Register</button>
-        </div>
+        <h2>Register</h2>
+        <input type="email" id="register-email" placeholder="Email">
+        <input type="password" id="register-password" placeholder="Password">
+        <button id="register-btn">Register</button>
 
-        <!-- Login Form -->
-        <!-- <div id="login-box">
-            <h2>Login</h2>
-            <input type="email" id="login-email" placeholder="Email">
-            <input type="password" id="login-password" placeholder="Password">
-            <button onclick="login()">Login</button>
-        </div> -->
+        <hr>
 
-        <button onclick="logout()" id="logout-btn" style="display:none;">Logout</button>
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <button id="login-btn">Login</button>
+
+        <hr>
+
+        <button id="logout-btn" class="hidden">Logout</button>
     </div>
 
-    <script src="login.js" type="module"></script>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-1yQL5ufMf-GPwBAN8H_GYGL6andB36g",
+            authDomain: "kisaan-mitra-a0e8f.firebaseapp.com",
+            projectId: "kisaan-mitra-a0e8f",
+            storageBucket: "kisaan-mitra-a0e8f.appspot.com",
+            messagingSenderId: "28889998059",
+            appId: "1:28889998059:web:e5995a6ef5ef818c8714ae",
+            measurementId: "G-EL950HE3PD"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        // Register Function
+        document.getElementById("register-btn").addEventListener("click", () => {
+            const email = document.getElementById("register-email").value;
+            const password = document.getElementById("register-password").value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("User Registered Successfully");
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+
+        // Login Function
+        document.getElementById("login-btn").addEventListener("click", () => {
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Login Successful!");
+                    document.getElementById("logout-btn").classList.remove("hidden");
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+
+        // Logout Function
+        document.getElementById("logout-btn").addEventListener("click", () => {
+            signOut(auth)
+                .then(() => {
+                    alert("User Logged Out");
+                    document.getElementById("logout-btn").classList.add("hidden");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
+    </script>
+
 </body>
 </html>
