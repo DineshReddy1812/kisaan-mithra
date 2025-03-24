@@ -71,6 +71,7 @@ nav ul li a:hover::after{
 .head-text{
     margin-top: 20%;
     font-size: 30PX;
+    display: flex;
 }
 .head-text h1{
     font: size 60px; 
@@ -198,37 +199,24 @@ margin-left: 399px ;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 35px;
-    margin-top: 50px;
     padding-left: 130px;
 }
 .skill-list div{
     background: #262626;
+    border: 2px solid #fff;
     padding: 40px;
     font-size: 13px;
     font-weight: 300;
     border-radius: 12px;
     width: 383px;
     height: 285px;
-    transition: background 0.5s,transform 0.5s;
-
-
-}
-.skill-list div img{
-    font-size: 50px;
-    margin-bottom: 30px;
+    /* transition: background 0.5s,transform 0.5s; */
 }
 .skill-list div h2{
     font-size: 30px;
     font-weight: 500;
     margin-bottom: 15px;
 
-}
-.skill-list div a{
-    text-decoration: none;
-   
-    font-size: 12px;
-    margin-top: 20px;
-    display: inline-block;
 }
 .sub-tittle{
     font-size: 65px;
