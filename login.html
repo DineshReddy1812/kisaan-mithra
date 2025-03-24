@@ -11,14 +11,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             background: #f4f4f4;
         }
-        
+
         .container {
+            margin-top: 50px;
             text-align: center;
             background: white;
             padding: 30px;
@@ -36,7 +33,7 @@
         }
 
         button {
-            padding: 10px 15px;
+            padding: 10px;
             background: #007bff;
             color: white;
             border: none;
@@ -52,26 +49,47 @@
         .hidden {
             display: none;
         }
+
+        .navbar {
+            background: #007bff;
+            padding: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .switch-btn {
+            background: #28a745;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>Register</h2>
-        <input type="email" id="register-email" placeholder="Email">
-        <input type="password" id="register-password" placeholder="Password">
-        <button id="register-btn">Register</button>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#">Kisaan-Mitra</a>
+        <a href="#" id="navbar-login-btn" style="float: right;">Login</a>
+    </div>
 
-        <hr>
-
+    <!-- Login Form -->
+    <div class="container" id="login-form">
         <h2>Login</h2>
         <input type="email" id="login-email" placeholder="Email">
         <input type="password" id="login-password" placeholder="Password">
         <button id="login-btn">Login</button>
+        <button class="switch-btn" id="show-register">Create an Account</button>
+    </div>
 
-        <hr>
-
-        <button id="logout-btn" class="hidden">Logout</button>
+    <!-- Register Form (Initially Hidden) -->
+    <div class="container hidden" id="register-form">
+        <h2>Register</h2>
+        <input type="email" id="register-email" placeholder="Email">
+        <input type="password" id="register-password" placeholder="Password">
+        <button id="register-btn">Register</button>
+        <button class="switch-btn" id="show-login">Already have an account? Login</button>
     </div>
 
     <!-- Firebase SDK -->
@@ -94,6 +112,17 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
 
+        // Switch Between Login & Register Forms
+        document.getElementById("show-register").addEventListener("click", () => {
+            document.getElementById("login-form").classList.add("hidden");
+            document.getElementById("register-form").classList.remove("hidden");
+        });
+
+        document.getElementById("show-login").addEventListener("click", () => {
+            document.getElementById("register-form").classList.add("hidden");
+            document.getElementById("login-form").classList.remove("hidden");
+        });
+
         // Register Function
         document.getElementById("register-btn").addEventListener("click", () => {
             const email = document.getElementById("register-email").value;
@@ -102,6 +131,8 @@
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     alert("User Registered Successfully");
+                    document.getElementById("register-form").classList.add("hidden");
+                    document.getElementById("login-form").classList.remove("hidden");
                 })
                 .catch((error) => {
                     alert(error.message);
@@ -116,23 +147,27 @@
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     alert("Login Successful!");
-                    document.getElementById("logout-btn").classList.remove("hidden");
+                    document.getElementById("login-form").classList.add("hidden");
+                    document.getElementById("navbar-login-btn").innerText = "Logout";
                 })
                 .catch((error) => {
                     alert(error.message);
                 });
         });
 
-        // Logout Function
-        document.getElementById("logout-btn").addEventListener("click", () => {
-            signOut(auth)
-                .then(() => {
-                    alert("User Logged Out");
-                    document.getElementById("logout-btn").classList.add("hidden");
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+        // Logout Function (Changes Navbar Button)
+        document.getElementById("navbar-login-btn").addEventListener("click", () => {
+            if (document.getElementById("navbar-login-btn").innerText === "Logout") {
+                signOut(auth)
+                    .then(() => {
+                        alert("User Logged Out");
+                        document.getElementById("navbar-login-btn").innerText = "Login";
+                        document.getElementById("login-form").classList.remove("hidden");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
         });
     </script>
 
